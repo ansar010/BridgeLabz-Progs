@@ -1,4 +1,5 @@
-GitRepositoriesView.GitDirectories=
-GitRepositoriesView.GitDirectories.relative=
+GitRepositoriesView.GitDirectories=/home/admin1/git/JavaFellowShip/.git\:/home/admin1/Documents/workspace-sts-3.9.7.RELEASE/.git\:
+GitRepositoriesView.GitDirectories.relative=/home/admin1/git/JavaFellowShip/.git\:.git\:
+RepositorySearchDialogSearchPath=/home/admin1/git
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1
