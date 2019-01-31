@@ -416,3 +416,24 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.jdt.internal.corext.ref
 !MESSAGE Help documentation could not be indexed completely.
 !SUBENTRY 1 org.eclipse.help.base 4 4 2019-01-31 18:48:41.408
 !MESSAGE Help document /org.eclipse.wst.jsdt.doc/reference/extension-points/org_eclipse_wst_jsdt_core_codeFormatter.html cannot be opened.
+
+!ENTRY org.eclipse.egit.core 4 0 2019-01-31 18:54:52.523
+!MESSAGE An exception occurred during push on URI file:////home/admin1/git/BridgeLabz-Progs: file:////home/admin1/git/BridgeLabz-Progs: not found.
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: file:////home/admin1/git/BridgeLabz-Progs: not found.
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:191)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:217)
+	at org.eclipse.egit.ui.internal.push.PushJob.performJob(PushJob.java:86)
+	at org.eclipse.egit.ui.internal.jobs.RepositoryJob.run(RepositoryJob.java:59)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: org.eclipse.jgit.errors.NoRemoteRepositoryException: file:////home/admin1/git/BridgeLabz-Progs: not found.
+	at org.eclipse.jgit.transport.TransportLocal$1.open(TransportLocal.java:132)
+	at org.eclipse.jgit.transport.TransportBundleFile$1.open(TransportBundleFile.java:107)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:553)
+	at org.eclipse.jgit.transport.Transport.openAll(Transport.java:482)
+	at org.eclipse.jgit.transport.Transport.openAll(Transport.java:372)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:155)
+	... 4 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2019-01-31 18:54:52.525
+!MESSAGE Can't connect to any repository: file:////home/admin1/git/BridgeLabz-Progs (file:////home/admin1/git/BridgeLabz-Progs: not found.)
