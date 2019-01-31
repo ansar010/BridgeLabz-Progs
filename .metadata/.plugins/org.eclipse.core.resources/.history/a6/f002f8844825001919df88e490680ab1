@@ -1,0 +1,7 @@
+package com.bridgelabz.aop;
+
+@AspectCl
+public class AspectCl 
+{
+	
+}

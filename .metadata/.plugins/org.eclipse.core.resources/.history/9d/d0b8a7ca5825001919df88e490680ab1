@@ -1,0 +1,31 @@
+package com.bridgelabz.aspect;
+
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
+public class AspectCl 
+{
+	@Pointcut("within(com.bridgelabz.aop.service.*)")
+	public void myAdvise() {}
+	
+	@Before("myAdvise()")
+	public void getAdviseBefore()
+	{
+		System.out.println("Advise called before the method");
+	}
+	
+	@After("myAdvise()")
+	public void getAdviseAfter()
+	{
+		System.out.println("Advise called After the method");
+	}
+//	
+//	@Around("myAdvise()")
+//	public void getAdviseAround()
+//	{
+//		System.out.println("Advise called before the method");
+//	}
+}

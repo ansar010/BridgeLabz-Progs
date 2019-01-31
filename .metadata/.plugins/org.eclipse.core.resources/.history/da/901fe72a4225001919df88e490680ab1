@@ -1,0 +1,15 @@
+package com.bridgelabz.aop.service;
+
+import com.bridgelabz.aop.model.Circle;
+import com.bridgelabz.aop.model.Oval;
+import com.bridgelabz.aop.model.Triangle;
+
+public class ShapeServices 
+{
+	Circle circle;
+	Triangle triangle;
+	Oval oval;
+
+	
+
+}

@@ -1,0 +1,18 @@
+package com.bridgelabz.aspect;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
+public class AspectCl 
+{
+	@Pointcut("within(com.bridgelabz.aop.service.*)")
+	public void myAdvise() {}
+	
+	@Before("myAdvise()")
+	public void getAdvise()
+	{
+		System.out.println("Advise called");
+	}
+}

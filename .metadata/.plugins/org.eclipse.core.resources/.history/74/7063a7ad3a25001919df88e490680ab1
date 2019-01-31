@@ -1,0 +1,10 @@
+package com.bridgelabz.aop.service;
+
+import com.bridgelabz.aop.model.Circle;
+import com.bridgelabz.aop.model.Triangle;
+
+public class Shape 
+{
+	Circle circle;
+	Triangle trianlge;
+}

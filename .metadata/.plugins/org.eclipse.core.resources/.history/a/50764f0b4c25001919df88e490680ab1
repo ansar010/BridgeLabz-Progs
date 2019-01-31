@@ -1,0 +1,11 @@
+package com.bridgelabz.aspect;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
+public class AspectCl 
+{
+	@Pointcut()
+	public void myAdvise() {}
+}
