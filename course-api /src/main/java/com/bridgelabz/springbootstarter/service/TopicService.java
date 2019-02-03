@@ -3,6 +3,7 @@ package com.bridgelabz.springbootstarter.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.springbootstarter.model.Topic;
@@ -13,9 +14,15 @@ public class TopicService
 	private List<Topic> topics = Arrays.asList(new Topic(1, "spring", "framework"),
 			new Topic(2, "SpringBoot", "spring tool"),
 			new Topic(3, "jpa", "tool for persist data"));
-	
+
 	public List<Topic> getAlltopics()
 	{
 		return topics;
+	}
+
+
+	public Topic getTopicByName(String name) {
+
+		return topics.stream().filter(topic->topic.getName().equals(name)).findFirst().get();
 	}
 }
