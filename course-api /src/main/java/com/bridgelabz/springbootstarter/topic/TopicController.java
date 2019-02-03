@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.springbootstarter.model.Topic;
@@ -16,15 +18,29 @@ public class TopicController
 	@Autowired
 	TopicService topicService;
 	
+	@RequestMapping("/topics")
+	public List<Topic> getAllTopic()
+	{
+		return topicService.getAlltopics();
+	}
+	
 	@RequestMapping("/topic/{name}")
 	public Topic getIdTopic(@PathVariable String name)
 	{
 		return topicService.getTopicByName(name);
 	}
 	
-	@RequestMapping("/topic")
-	public List<Topic> getAllTopic()
+	//it means when the post request happen on given url/value below method get executed
+	@RequestMapping(value="/topics",method=RequestMethod.POST)
+	public void addTopic(@RequestBody Topic topic)
 	{
-		return topicService.getAlltopics();
+		System.out.println("topic "+topic.getId()+" "+topic.getName()+" "+topic.getDescription());
+		 topicService.addTopic(topic);
+	}
+
+	@RequestMapping(value="/topics/{id}",method=RequestMethod.PUT)
+	public void updateTopic( @PathVariable int id,@RequestBody Topic topic )
+	{
+		topicService.updateTopic(id,topic);
 	}
 }

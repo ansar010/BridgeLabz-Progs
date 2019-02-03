@@ -11,17 +11,18 @@ public class Topic
 	public Topic() {
 
 	}
-	
+
 	public Topic(int id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
