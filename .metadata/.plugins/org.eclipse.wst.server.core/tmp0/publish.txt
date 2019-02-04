@@ -1,4 +1,4 @@
 #Tomcat publish data
-#Thu Jan 31 09:55:53 IST 2019
-org.eclipse.jst.j2ee.server\:/binary\:/home/admin1/.m2/repository/org/springframework/spring-web/5.1.1.RELEASE/spring-web-5.1.1.RELEASE.jar=/home/admin1/Downloads/spring-tool-suite-3.9.7.RELEASE-e4.10.0-linux-gtk-x86_64/sts-bundle/pivotal-tc-server/instances/base-instance/wtpwebapps/Demo/WEB-INF/lib/spring-web-5.1.1.RELEASE.jar
-org.eclipse.jst.j2ee.server\:Demo=/home/admin1/Downloads/spring-tool-suite-3.9.7.RELEASE-e4.10.0-linux-gtk-x86_64/sts-bundle/pivotal-tc-server/instances/base-instance/wtpwebapps/Demo
+#Mon Feb 04 11:08:11 IST 2019
+org.eclipse.jst.jee.server\:/binary\:/home/admin1/.m2/repository/org/springframework/spring-web/5.1.4.RELEASE/spring-web-5.1.4.RELEASE.jar=/home/admin1/Downloads/spring-tool-suite-3.9.7.RELEASE-e4.10.0-linux-gtk-x86_64/sts-bundle/pivotal-tc-server/instances/base-instance/wtpwebapps/course-api-data/WEB-INF/lib/spring-web-5.1.4.RELEASE.jar
+org.eclipse.jst.jee.server\:course-api-data=/home/admin1/Downloads/spring-tool-suite-3.9.7.RELEASE-e4.10.0-linux-gtk-x86_64/sts-bundle/pivotal-tc-server/instances/base-instance/wtpwebapps/course-api-data

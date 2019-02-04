@@ -24,7 +24,7 @@ public class TopicController
 		return topicService.getAlltopics();
 	}
 	
-	@RequestMapping("/topic/{name}")
+	@RequestMapping("/topics/{name}")
 	public Topic getIdTopic(@PathVariable String name)
 	{
 		return topicService.getTopicByName(name);
@@ -42,5 +42,11 @@ public class TopicController
 	public void updateTopic( @PathVariable int id,@RequestBody Topic topic )
 	{
 		topicService.updateTopic(id,topic);
+	}
+	
+	@RequestMapping(value="/topics/{id}",method=RequestMethod.DELETE)
+	public void deleteTopic( @PathVariable int id,@RequestBody Topic topic )
+	{
+		topicService.deleteTopic(id,topic);
 	}
 }

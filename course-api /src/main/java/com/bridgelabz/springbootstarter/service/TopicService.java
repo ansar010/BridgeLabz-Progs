@@ -37,10 +37,15 @@ public class TopicService
 			Topic t = topics.get(i);
 			if(t.getId()==id)
 			{
-				topics.set(i, topic);
-				//return;
+				topics.set(i,topic);
+				return;
 			}
 		}
+	}
+
+	public void deleteTopic(int id, Topic topic) 
+	{
+		topics.removeIf(t->t.getId()==id);
 	}
 	
 	
