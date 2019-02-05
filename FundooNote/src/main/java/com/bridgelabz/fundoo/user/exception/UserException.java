@@ -1,0 +1,18 @@
+package com.bridgelabz.fundoo.user.exception;
+
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+public class UserException extends Exception
+{
+	private static final long serialVersionUID = 1L;
+	
+	String errorMessage;
+	int errorCode;
+	
+	public UserException(String errorMessage)
+	{
+		super(errorMessage);
+	}
+	
+}
