@@ -14,5 +14,8 @@ public class UserException extends Exception
 	{
 		super(errorMessage);
 	}
-	
+	public UserException(int errorCode,String errorMessage)
+	{
+		super(errorMessage);
+	}
 }

@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import lombok.Getter;
@@ -30,14 +29,13 @@ public class User implements Serializable
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 //	@NotEmpty(message = "please provide your id")
-	@NotNull
 	private long id;
 
 	@Column(name="name")
 	@NotEmpty(message = "please provide your name")
 	private String name;
 
-	@Column(name="email", nullable=false, unique=true)
+	@Column(name="email", nullable=false)
 	@Email(message = "Please provide a valid e-mail")
 	@NotEmpty(message="Please provide valid email")
 	private String email;
