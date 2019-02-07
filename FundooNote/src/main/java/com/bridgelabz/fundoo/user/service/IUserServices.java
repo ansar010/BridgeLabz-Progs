@@ -1,11 +1,18 @@
 package com.bridgelabz.fundoo.user.service;
 
+import javax.mail.MessagingException;
+
 import com.bridgelabz.fundoo.user.dto.LoginDTO;
 import com.bridgelabz.fundoo.user.dto.UserDTO;
 import com.bridgelabz.fundoo.user.exception.UserException;
 
 public interface IUserServices
 {
-	public boolean addUser(UserDTO userDTo) throws UserException;
+	public boolean addUser(UserDTO userDTo) throws UserException, MessagingException;
 	public boolean userLogin(LoginDTO loginDTO);
+	public void test(String string) throws MessagingException;
+	public boolean isVerified();
+	public boolean verifyToken(String token) throws Exception;
+	
 }
+

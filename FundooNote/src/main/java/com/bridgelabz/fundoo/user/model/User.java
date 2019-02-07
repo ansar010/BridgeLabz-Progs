@@ -30,7 +30,10 @@ public class User implements Serializable
 	@Column(name="id")
 //	@NotEmpty(message = "please provide your id")
 	private long id;
-
+	
+	@Column(name="verification")
+	boolean isVarified;
+	
 	@Column(name="name")
 	@NotEmpty(message = "please provide your name")
 	private String name;

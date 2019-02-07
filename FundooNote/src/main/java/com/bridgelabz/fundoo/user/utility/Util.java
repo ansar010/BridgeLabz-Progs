@@ -1,4 +1,4 @@
-package com.bridgelabz.fundoo;
+package com.bridgelabz.fundoo.user.utility;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
