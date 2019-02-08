@@ -16,18 +16,12 @@ public class ApplicationConfiguration
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer Property()
-	{
-		return new PropertySourcesPlaceholderConfigurer();
-	}
-	//
-	//	@Bean
-	//	public JavaMailSender mailSend()
-	//	{
-	//		return new JavaMailSenderImpl();
-	//	}
-
+//	@Bean
+//	public static PropertySourcesPlaceholderConfigurer Property()
+//	{
+//		return new PropertySourcesPlaceholderConfigurer();
+//	}
+	
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();

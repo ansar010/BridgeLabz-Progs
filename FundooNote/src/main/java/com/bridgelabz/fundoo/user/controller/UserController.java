@@ -5,11 +5,10 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 
-import org.hibernate.cfg.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -26,9 +25,10 @@ import com.bridgelabz.fundoo.user.exception.UserException;
 import com.bridgelabz.fundoo.user.service.IUserServices;
 import com.bridgelabz.fundoo.user.utility.Util;
 
+
 @RestController
-@PropertySource("classpath:message.properties")
-@RequestMapping("/api/user")
+//@CrossOrigin()
+@RequestMapping("/user")
 public class UserController 
 {
 	@Autowired
@@ -58,7 +58,7 @@ public class UserController
 
 		if(check)
 		{
-			return new ResponseEntity<String>("Succesfully Added", HttpStatus.OK);
+			return new ResponseEntity<String>(environment.getProperty("a"), HttpStatus.OK);
 		}
 		else
 		{
@@ -80,7 +80,7 @@ public class UserController
 		boolean check = userServices.userLogin(loginDTO);
 		if(check)
 		{
-			return new ResponseEntity<String>("Succesfully Login", HttpStatus.OK);
+			return new ResponseEntity<String>(environment.getProperty("a"), HttpStatus.OK);
 		}
 		else
 		{
@@ -99,12 +99,25 @@ public class UserController
 			return new ResponseEntity<String>("Not Activated", HttpStatus.NOT_ACCEPTABLE);
 
 	}
-
-	@RequestMapping("/testmail")
-	public void SendMail() throws MessagingException, UnsupportedEncodingException 
+	
+	@RequestMapping("/test")
+	public ResponseEntity<String> userVer()
 	{
-		//util.send("bandgar09@gmail.com","Test mail from Spring", "Hello ");
-		userServices.test("ansaruddeen030@gmail.com");
+		//boolean check=userServices.verifyToken(token);
+
+		//if(check)
+			return new ResponseEntity<String>("Activated", HttpStatus.ACCEPTED);
+		//else
+			//return new ResponseEntity<String>("Not Activated", HttpStatus.NOT_ACCEPTABLE);
+
 	}
+
+//	@RequestMapping("/testmail")
+//	public String sendMail() throws MessagingException, UnsupportedEncodingException 
+//	{
+//		//util.send("bandgar09@gmail.com","Test mail from Spring", "Hello ");
+//		//userServices.test("ansaruddeen030@gmail.com");
+//		return "success";
+//	}
 
 }

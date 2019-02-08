@@ -26,20 +26,6 @@ public class Util
 	 * @return true 
 	 * @throws MessagingException
 	 */
-	//	public void sendMail(String to,String subject,String body) throws MessagingException
-	//	{
-	//		MimeMessage mimeMessage=javaMailSender.createMimeMessage();
-	//		//class for create mime-message and provide in-line support
-	//		MimeMessageHelper helper;
-	//		// true indicates multipart message
-	//		helper = new MimeMessageHelper(mimeMessage, true);
-	//
-	//		helper.setTo(to);
-	//		helper.setSubject(subject);
-	//		helper.setText(body);
-	//
-	//		//return true;
-
 	@Autowired
 	private JavaMailSender javaMailSender;	
 
@@ -60,5 +46,10 @@ public class Util
 		// continue using helper object for more functionalities like adding attachments, etc.  
 
 		javaMailSender.send(message);
+	}
+	
+	public String getUrl(long id) throws IllegalArgumentException, UnsupportedEncodingException
+	{
+		return "192.168.0.125:8080/user/userActivation/"+UserToken.generateToken(id);
 	}
 }

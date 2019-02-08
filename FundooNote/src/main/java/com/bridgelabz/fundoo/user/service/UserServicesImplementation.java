@@ -51,11 +51,11 @@ public class UserServicesImplementation implements IUserServices
 		userRepository.save(user);
 
 		//generating token to activate user account
-		String token = UserToken.generateToken(user.getId());
+		//String token = UserToken.generateToken(user.getId());
 
 		//sending mail to user along with generated token
-		util.send(userDTO.getEmail(),"User Activation", "link to Activate account :192.168.0.125:8080/userActivation/?token="+token);
-
+		//util.send(userDTO.getEmail(),"User Activation", "link to Activate account: http://localhost:8080/userActivation/"+token);
+		util.send(user.getEmail(), "USer Activation", util.getUrl(user.getId()));
 		return true;
 	}
 
@@ -84,16 +84,6 @@ public class UserServicesImplementation implements IUserServices
 	{
 		//logic
 		return true;
-	}
-
-	public void test(String email) throws MessagingException, UnsupportedEncodingException  
-	{
-		//IUserRepository userRepository = null;
-		//Optional<User> findByEmail = userRepository.findByEmail("ram@gmail.com");
-		//System.out.println(findByEmail.get().getPassword());
-		//util.send("bandgar09@gmail.com","Test mail from Spring", "Hello ");
-		util.send(email,"User Activation", "link to Activate account : 192.168.0.125:8080/userActivation");
-
 	}
 
 	public boolean verifyToken(String token) throws Exception
