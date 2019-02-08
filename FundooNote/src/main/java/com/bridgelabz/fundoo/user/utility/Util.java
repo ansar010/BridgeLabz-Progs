@@ -1,6 +1,9 @@
 package com.bridgelabz.fundoo.user.utility;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +14,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Util 
 {
-//	@Autowired
-//	JavaMailSender javaMailSender;
+	//	@Autowired
+	//	JavaMailSender javaMailSender;
 
-	
+
 	/**
 	 * 
 	 * @param to user mail id
@@ -23,35 +26,39 @@ public class Util
 	 * @return true 
 	 * @throws MessagingException
 	 */
-//	public void sendMail(String to,String subject,String body) throws MessagingException
-//	{
-//		MimeMessage mimeMessage=javaMailSender.createMimeMessage();
-//		//class for create mime-message and provide in-line support
-//		MimeMessageHelper helper;
-//		// true indicates multipart message
-//		helper = new MimeMessageHelper(mimeMessage, true);
-//
-//		helper.setTo(to);
-//		helper.setSubject(subject);
-//		helper.setText(body);
-//
-//		//return true;
-		
-		@Autowired
-		private JavaMailSender javaMailSender;	
-		
-		public void send(String to, String subject, String body) throws MessagingException {
-			
-			MimeMessage message = javaMailSender.createMimeMessage();
-			MimeMessageHelper helper;
-			
-			helper = new MimeMessageHelper(message, true); // true indicates
-														   // multipart message
-			helper.setSubject(subject);
-			helper.setTo(to);
-			helper.setText(body, true); // true indicates html
-			// continue using helper object for more functionalities like adding attachments, etc.  
-			
-			javaMailSender.send(message);
+	//	public void sendMail(String to,String subject,String body) throws MessagingException
+	//	{
+	//		MimeMessage mimeMessage=javaMailSender.createMimeMessage();
+	//		//class for create mime-message and provide in-line support
+	//		MimeMessageHelper helper;
+	//		// true indicates multipart message
+	//		helper = new MimeMessageHelper(mimeMessage, true);
+	//
+	//		helper.setTo(to);
+	//		helper.setSubject(subject);
+	//		helper.setText(body);
+	//
+	//		//return true;
+
+	@Autowired
+	private JavaMailSender javaMailSender;	
+
+	public void send(String to, String subject, String body) throws MessagingException, UnsupportedEncodingException {
+
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper;
+
+		helper = new MimeMessageHelper(message, true); // true indicates
+		// multipart message
+		//helper.setFrom("NoReply-Fundoo");
+		helper.setFrom(new InternetAddress("example@gmail.com", "NoReply-fundoo"));
+		//helper.setReplyTo((InternetAddress.parse("fundoonote19@gmail.com",false)));
+		helper.setReplyTo("fundoonote19@gmail.com");
+		helper.setSubject(subject);
+		helper.setTo(to);
+		helper.setText(body, true); // true indicates html
+		// continue using helper object for more functionalities like adding attachments, etc.  
+
+		javaMailSender.send(message);
 	}
 }

@@ -1,11 +1,15 @@
 package com.bridgelabz.fundoo.user.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 
+import org.hibernate.cfg.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,7 +27,8 @@ import com.bridgelabz.fundoo.user.service.IUserServices;
 import com.bridgelabz.fundoo.user.utility.Util;
 
 @RestController
-//classPath()
+@PropertySource("classpath:message.properties")
+@RequestMapping("/api/user")
 public class UserController 
 {
 	@Autowired
@@ -33,12 +38,12 @@ public class UserController
 	@Autowired
 	Util util;
 
-	//	@Autowired
-	//	private Environment environment;
+	@Autowired
+	private Environment environment;
 
 	//	@PostMapping("/register")
 	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public ResponseEntity<String> register(@Valid @RequestBody UserDTO userDTo,BindingResult bindingResult) throws UserException, MessagingException
+	public ResponseEntity<String> register(@Valid @RequestBody UserDTO userDTo,BindingResult bindingResult) throws UserException, MessagingException, IllegalArgumentException, UnsupportedEncodingException
 	{
 		logger.info("userDTO data"+userDTo);
 		logger.trace("User Registration");
@@ -87,27 +92,19 @@ public class UserController
 	public ResponseEntity<String> userVerification(@PathVariable String token) throws Exception
 	{
 		boolean check=userServices.verifyToken(token);
-//		boolean check=userServices.isVerified();
-//		if(check)
-//		{
-//			return new ResponseEntity<String>("Activated", HttpStatus.ACCEPTED);
-//		}
-		return new ResponseEntity<String>(" Activated", HttpStatus.ACCEPTED);
+
+		if(check)
+			return new ResponseEntity<String>("Activated", HttpStatus.ACCEPTED);
+		else
+			return new ResponseEntity<String>("Not Activated", HttpStatus.NOT_ACCEPTABLE);
+
 	}
-	
+
 	@RequestMapping("/testmail")
-	public void SendMail() throws MessagingException {
-
-
+	public void SendMail() throws MessagingException, UnsupportedEncodingException 
+	{
 		//util.send("bandgar09@gmail.com","Test mail from Spring", "Hello ");
 		userServices.test("ansaruddeen030@gmail.com");
 	}
-	//		
-	//		@RequestMapping("/mail")
-	//		public void SendMail()  
-	//		{
-	//			userServices.test();
-	//System.out.println(findByEmail);
-	//util.send("bandgar09@gmail.com","Test mail from Spring", "Hello ");
-	//}
+
 }

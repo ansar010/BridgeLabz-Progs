@@ -1,5 +1,6 @@
 package com.bridgelabz.fundoo.user.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
@@ -34,26 +35,26 @@ public class UserServicesImplementation implements IUserServices
 	ModelMapper modelMapper;
 
 	@Override
-	public boolean addUser(UserDTO userDTO) throws UserException, MessagingException
+	public boolean addUser(UserDTO userDTO) throws UserException, MessagingException, IllegalArgumentException, UnsupportedEncodingException
 	{
+		//getting user record by email
 		Optional<User> avaiability = userRepository.findByEmail(userDTO.getEmail());
 		if(avaiability.isPresent())
 		{
 			throw  new UserException("User Already Exist..!");
 		}
 
+		//encrypting password by using BCrypt encoder
 		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-		User user = modelMapper.map(userDTO, User.class);
+		User user = modelMapper.map(userDTO, User.class);//storing value of one model into another
 
-		//System.out.println("user "+user);
-		//try {
-		//} catch (MessagingException e) {
-			//e.printStackTrace();
-		//}
 		userRepository.save(user);
+
+		//generating token to activate user account
 		String token = UserToken.generateToken(user.getId());
-		
-		util.send(userDTO.getEmail(),"User Activation", "link to Activate account : http://localhost:8080/userActivation/"+token);
+
+		//sending mail to user along with generated token
+		util.send(userDTO.getEmail(),"User Activation", "link to Activate account :192.168.0.125:8080/userActivation/?token="+token);
 
 		return true;
 	}
@@ -66,12 +67,16 @@ public class UserServicesImplementation implements IUserServices
 		//	System.out.println("Password -> "+password);
 		//Optional<User> userPassword = userRepository.findBypassword(password);
 		String userPassword=userEmail.get().getPassword();
-
-		if(userEmail.isPresent()&&passwordEncoder.matches(loginDTO.getPassword(), userPassword))
+		if(userEmail.get().isVarified()==true)
 		{
-			return true;
-		}		
+			if(userEmail.isPresent()&&passwordEncoder.matches(loginDTO.getPassword(), userPassword))
+			{
+				return true;
+			}
+
+		}
 		return false;
+
 	}
 
 	@Override
@@ -81,35 +86,31 @@ public class UserServicesImplementation implements IUserServices
 		return true;
 	}
 
-	public void test(String email) throws MessagingException  
+	public void test(String email) throws MessagingException, UnsupportedEncodingException  
 	{
 		//IUserRepository userRepository = null;
 		//Optional<User> findByEmail = userRepository.findByEmail("ram@gmail.com");
 		//System.out.println(findByEmail.get().getPassword());
 		//util.send("bandgar09@gmail.com","Test mail from Spring", "Hello ");
-		util.send(email,"User Activation", "link to Activate account : http://localhost:8080/userActivation");
+		util.send(email,"User Activation", "link to Activate account : 192.168.0.125:8080/userActivation");
 
 	}
 
-//	@Override
-//	public boolean verifyToken(String token) throws Exception 
-//	{
-//		long userId = UserToken.tokenVerify(token);
-//		Optional<User> user = userRepository.findById(userId);
-//		user.get().setVarified(true);
-//		User user2 = modelMapper.map(user, User.class);
-//		userRepository.save(user2);
-//		return true;
-//	}
-	
-	public boolean verifyToken(String token) throws Exception{
-		long userId = UserToken.tokenVerify(token);
-		userRepository.findById(userId).map(this::verify);
-		return true;
+	public boolean verifyToken(String token) throws Exception
+	{
+		long userId = UserToken.tokenVerify(token);//taking decoded token id
+		Optional<User> checkVerify = userRepository.findById(userId).map(this::verify);
+		
+		if(checkVerify.isPresent())
+			return true;
+		else
+			return false;
 	}
+
+	//setting true to activate the user in db
 	private User verify(User user) {
 		user.setVarified(true);
 		return userRepository.save(user);
-}
+	}
 
 }
