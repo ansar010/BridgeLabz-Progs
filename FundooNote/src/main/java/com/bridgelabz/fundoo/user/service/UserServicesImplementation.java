@@ -55,7 +55,7 @@ public class UserServicesImplementation implements IUserServices
 
 		//sending mail to user along with generated token
 		//util.send(userDTO.getEmail(),"User Activation", "link to Activate account: http://localhost:8080/userActivation/"+token);
-		util.send(user.getEmail(), "USer Activation", util.getUrl(user.getId()));
+		util.send(user.getEmail(), "USer Activation", util.getBody("192.168.0.125:8080/user/userActivation/",user.getId()));
 		return true;
 	}
 

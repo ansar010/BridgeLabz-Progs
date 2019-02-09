@@ -33,6 +33,7 @@ public class UserController
 {
 	@Autowired
 	IUserServices userServices;
+	
 	static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
@@ -99,7 +100,7 @@ public class UserController
 			return new ResponseEntity<String>("Not Activated", HttpStatus.NOT_ACCEPTABLE);
 
 	}
-	
+
 	@RequestMapping("/test")
 	public ResponseEntity<String> userVer()
 	{

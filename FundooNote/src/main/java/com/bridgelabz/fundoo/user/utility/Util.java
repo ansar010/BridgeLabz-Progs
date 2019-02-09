@@ -48,8 +48,8 @@ public class Util
 		javaMailSender.send(message);
 	}
 	
-	public String getUrl(long id) throws IllegalArgumentException, UnsupportedEncodingException
+	public String getBody(String link,long id) throws IllegalArgumentException, UnsupportedEncodingException
 	{
-		return "192.168.0.125:8080/user/userActivation/"+UserToken.generateToken(id);
+		return link+UserToken.generateToken(id);
 	}
 }
