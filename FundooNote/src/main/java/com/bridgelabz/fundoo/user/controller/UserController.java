@@ -101,17 +101,17 @@ public class UserController
 
 	}
 
-	@RequestMapping("/test")
-	public ResponseEntity<String> userVer()
-	{
-		//boolean check=userServices.verifyToken(token);
-
-		//if(check)
-			return new ResponseEntity<String>("Activated", HttpStatus.ACCEPTED);
-		//else
-			//return new ResponseEntity<String>("Not Activated", HttpStatus.NOT_ACCEPTABLE);
-
-	}
+//	@RequestMapping("/test")
+//	public ResponseEntity<String> userVer()
+//	{
+//		//boolean check=userServices.verifyToken(token);
+//
+//		//if(check)
+//			return new ResponseEntity<String>("Activated", HttpStatus.ACCEPTED);
+//		//else
+//			//return new ResponseEntity<String>("Not Activated", HttpStatus.NOT_ACCEPTABLE);
+//
+//	}
 
 //	@RequestMapping("/testmail")
 //	public String sendMail() throws MessagingException, UnsupportedEncodingException 

@@ -67,6 +67,7 @@ public class UserServicesImplementation implements IUserServices
 		//	System.out.println("Password -> "+password);
 		//Optional<User> userPassword = userRepository.findBypassword(password);
 		String userPassword=userEmail.get().getPassword();
+		
 		if(userEmail.get().isVarified()==true)
 		{
 			if(userEmail.isPresent()&&passwordEncoder.matches(loginDTO.getPassword(), userPassword))

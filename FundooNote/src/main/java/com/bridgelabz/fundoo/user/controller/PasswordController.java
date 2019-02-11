@@ -14,7 +14,6 @@ import com.bridgelabz.fundoo.user.dto.UserDTO;
 import com.bridgelabz.fundoo.user.service.IPasswordServices;
 
 @RestController
-
 public class PasswordController 
 {
 	@Autowired
