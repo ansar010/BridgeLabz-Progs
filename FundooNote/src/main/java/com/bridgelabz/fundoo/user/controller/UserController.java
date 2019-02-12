@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ import com.bridgelabz.fundoo.user.utility.Util;
 @RestController
 //@CrossOrigin()
 @RequestMapping("/user")
+@PropertySource("classpath:message.properties")
 public class UserController 
 {
 	@Autowired
@@ -56,14 +58,14 @@ public class UserController
 			throw new UserException("Data doesn't matched to field..!");
 		}
 		boolean check = userServices.addUser(userDTo);
-
+		System.out.println("Environment "+environment.getProperty("a"));
 		if(check)
 		{
-			return new ResponseEntity<String>(environment.getProperty("a"), HttpStatus.OK);
+			return new ResponseEntity<>(environment.getProperty("a"), HttpStatus.OK);
 		}
 		else
 		{
-			return new ResponseEntity<String>("fail to add", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("fail to add", HttpStatus.NOT_FOUND);
 			//return "un success";
 		}
 	}
@@ -86,7 +88,7 @@ public class UserController
 		else
 		{
 			return new ResponseEntity<String>("fail to Login", HttpStatus.NOT_FOUND);
-		}	
+		}
 	}
 
 	@RequestMapping("/userActivation/{token}")
