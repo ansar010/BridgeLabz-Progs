@@ -14,7 +14,8 @@ public interface IUserServices
 	public boolean userLogin(LoginDTO loginDTO);
 //	public void test(String string) throws MessagingException, UnsupportedEncodingException;
 	public boolean isVerified();
-	public boolean verifyToken(String token) throws Exception;
+	public boolean verifyToken(String token) throws Exception
+	;
 	
 }
 

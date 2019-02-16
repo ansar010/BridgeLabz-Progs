@@ -13,6 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,21 +24,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bridgelabz.fundoo.user.dto.LoginDTO;
 import com.bridgelabz.fundoo.user.dto.UserDTO;
 import com.bridgelabz.fundoo.user.exception.UserException;
+import com.bridgelabz.fundoo.user.response.Response;
 import com.bridgelabz.fundoo.user.service.IUserServices;
 import com.bridgelabz.fundoo.user.utility.Util;
 
 
 @RestController
-//@CrossOrigin()
+@CrossOrigin(origins = "*" )
 @RequestMapping("/user")
 @PropertySource("classpath:message.properties")
 public class UserController 
 {
+	static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
 	IUserServices userServices;
 	
-	static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
+	Response response;
+	
 	@Autowired
 	Util util;
 
@@ -46,7 +50,7 @@ public class UserController
 
 	//	@PostMapping("/register")
 	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public ResponseEntity<String> register(@Valid @RequestBody UserDTO userDTo,BindingResult bindingResult) throws UserException, MessagingException, IllegalArgumentException, UnsupportedEncodingException
+	public ResponseEntity<Response> register(@Valid @RequestBody UserDTO userDTo,BindingResult bindingResult) throws UserException, MessagingException, IllegalArgumentException, UnsupportedEncodingException
 	{
 		logger.info("userDTO data"+userDTo);
 		logger.trace("User Registration");
@@ -59,13 +63,17 @@ public class UserController
 		}
 		boolean check = userServices.addUser(userDTo);
 		System.out.println("Environment "+environment.getProperty("a"));
+		response=new Response();
 		if(check)
 		{
-			return new ResponseEntity<>(environment.getProperty("a"), HttpStatus.OK);
+			response.setStatusCode(200);
+			response.setStatusMessge(environment.getProperty("a"));
+			return new ResponseEntity<Response>(response, HttpStatus.OK);
 		}
 		else
 		{
-			return new ResponseEntity<>("fail to add", HttpStatus.NOT_FOUND);
+			response.setStatusMessge("fail to Register");
+			return new ResponseEntity<Response>(response, HttpStatus.NOT_FOUND);
 			//return "un success";
 		}
 	}
@@ -94,6 +102,7 @@ public class UserController
 	@RequestMapping("/userActivation/{token}")
 	public ResponseEntity<String> userVerification(@PathVariable String token) throws Exception
 	{
+		System.out.println("hihihihihi");
 		boolean check=userServices.verifyToken(token);
 
 		if(check)
